@@ -11,6 +11,8 @@ class RequestmapController {
     static namespace = "admin"
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def springSecurityService
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Requestmap.list(params), model:[requestmapInstanceCount: Requestmap.count()]
@@ -37,6 +39,8 @@ class RequestmapController {
         }
 
         requestmapInstance.save flush:true
+
+        springSecurityService.clearCachedRequestmaps()
 
         request.withFormat {
             form multipartForm {

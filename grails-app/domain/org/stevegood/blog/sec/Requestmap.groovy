@@ -2,7 +2,7 @@ package org.stevegood.blog.sec
 
 import org.springframework.http.HttpMethod
 
-class Requestmap {
+class Requestmap implements Serializable {
 
     String url
     String configAttribute

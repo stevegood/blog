@@ -1,6 +1,6 @@
 package org.stevegood.blog.sec
 
-class User {
+class User implements Serializable {
 
 	transient springSecurityService
 

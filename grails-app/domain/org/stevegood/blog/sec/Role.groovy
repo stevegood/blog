@@ -1,6 +1,6 @@
 package org.stevegood.blog.sec
 
-class Role {
+class Role implements Serializable {
 
 	String authority
 

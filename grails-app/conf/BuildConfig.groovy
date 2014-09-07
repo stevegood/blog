@@ -49,8 +49,6 @@ grails.project.dependency.resolution = {
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-        // runtime 'mysql:mysql-connector-java:5.1.29'
-        // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
         compile "net.sf.ehcache:ehcache-core:2.4.8"
         compile "org.springframework.cloud:cloudfoundry-connector:0.9.9.RELEASE"
@@ -60,25 +58,19 @@ grails.project.dependency.resolution = {
     plugins {
         // plugins for the build system only
         build ":tomcat:7.0.55"
+        build ":standalone:1.2.1"
 
         // plugins for the compile step
         compile ":scaffolding:2.1.2"
-//        compile ':cache:1.1.7'
         compile ":asset-pipeline:1.9.6"
         compile ":mongodb:3.0.2"
-        compile ":mongodb-session:0.1"
+//        compile ":redis-database-session:1.0.0"
+//        compile ":mongodb-session:0.1"
+        compile ':standalone-tomcat-redis:0.3'
         compile ":slug-generator:0.5"
         compile ":spring-security-core:2.0-RC4"
 
         // plugins needed at runtime but not for compilation
-//        runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"
-//        runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
-
-        // Uncomment these to enable additional asset-pipeline capabilities
-        //compile ":sass-asset-pipeline:1.9.0"
-        //compile ":less-asset-pipeline:1.10.0"
-        //compile ":coffee-asset-pipeline:1.8.0"
-        //compile ":handlebars-asset-pipeline:1.3.0.3"
     }
 }

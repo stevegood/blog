@@ -15,3 +15,8 @@ applications:
       provider: 
       version: 
       plan: sandbox
+    sgo-blog-session:
+      label: rediscloud
+      provider:
+      version:
+      plan: 25mb

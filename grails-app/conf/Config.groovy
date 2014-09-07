@@ -94,6 +94,33 @@ environments {
     production {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
+        try {
+            def cloud = new CloudFactory().cloud
+
+            if (cloud) {
+                def mongoInfo = cloud?.getServiceInfo('sgo-blog-data')
+                def redisInfo = cloud?.getServiceInfo('sgo-blog-session')
+
+                grails {
+                    if (mongoInfo) {
+                        mongo {
+                            host = mongoInfo?.host
+                            port = mongoInfo?.port
+                            databaseName = mongoInfo?.database
+                            username = mongoInfo?.userName
+                            password = mongoInfo?.password
+                        }
+                    }
+                }
+
+                if (redisInfo) {
+//                    grails.plugin.standalone.tomcat.redis.dbIndex = 1
+                    grails.plugin.standalone.tomcat.redis.redisHostname = redisInfo?.host
+                    grails.plugin.standalone.tomcat.redis.redisPassword = redisInfo?.password
+                    grails.plugin.standalone.tomcat.redis.redisPort = redisInfo?.port
+                }
+            }
+        } catch(e) {}
     }
 }
 
@@ -117,23 +144,6 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
-
-try {
-    def cloud = new CloudFactory().cloud
-    def mongoInfo = cloud?.getServiceInfo('sgo-blog-data')
-
-    if (mongoInfo) {
-        grails {
-            mongo {
-                host = mongoInfo?.host
-                port = mongoInfo?.port
-                databaseName = mongoInfo?.database
-                username = mongoInfo?.userName
-                password = mongoInfo?.password
-            }
-        }
-    }
-} catch(e) {}
 
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.stevegood.blog.sec.User'

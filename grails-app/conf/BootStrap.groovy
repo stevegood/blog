@@ -15,9 +15,11 @@ class BootStrap {
                 '/**/css/**':                     'permitAll',
                 '/**/images/**':                  'permitAll',
                 '/**/favicon.ico':                'permitAll',
-                '/**':                            'ROLE_SUPER_USER',
                 '/login/**':                      'permitAll',
-                '/logout/**':                     'permitAll'
+                '/logout/**':                     'permitAll',
+                '/admin/**':                      'ROLE_SUPER_USER',
+                '/requestmap/**':                 'ROLE_SUPER_USER',
+                '/security/**':                   'ROLE_SUPER_USER'
         ].each { k, v ->
             Requestmap.findOrCreateByUrlAndConfigAttribute(k, v).save()
         }

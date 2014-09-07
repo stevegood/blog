@@ -1,6 +1,6 @@
 package org.stevegood.blog
 
-class Article {
+class Article implements Serializable {
 
     static transients = ['slugGeneratorService']
 
