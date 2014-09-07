@@ -151,5 +151,3 @@ grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.stevegood.
 grails.plugin.springsecurity.authority.className = 'org.stevegood.blog.sec.Role'
 grails.plugin.springsecurity.requestMap.className = 'org.stevegood.blog.sec.Requestmap'
 grails.plugin.springsecurity.securityConfigType = 'Requestmap'
-
-grails.plugin.databasesession.enabled = true

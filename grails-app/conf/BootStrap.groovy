@@ -5,21 +5,36 @@ import org.stevegood.blog.sec.UserRole
 
 class BootStrap {
 
+    def userService
+
     def init = { servletContext ->
+        // specifying env here so that this doesn't run in test
+        environments {
+            development {
+                setup()
+            }
+            production {
+                setup()
+            }
+        }
+    }
+    def destroy = {
+    }
+
+    void setup() {
         [
-                '/':                              'permitAll',
-                '/index':                         'permitAll',
-                '/index.gsp':                     'permitAll',
-                '/assets/**':                     'permitAll',
-                '/**/js/**':                      'permitAll',
-                '/**/css/**':                     'permitAll',
-                '/**/images/**':                  'permitAll',
-                '/**/favicon.ico':                'permitAll',
-                '/login/**':                      'permitAll',
-                '/logout/**':                     'permitAll',
-                '/admin/**':                      'ROLE_SUPER_USER',
-                '/requestmap/**':                 'ROLE_SUPER_USER',
-                '/security/**':                   'ROLE_SUPER_USER'
+            '/':                 'permitAll',
+            '/index':            'permitAll',
+            '/index.gsp':        'permitAll',
+            '/assets/**':        'permitAll',
+            '/**/js/**':         'permitAll',
+            '/**/css/**':        'permitAll',
+            '/**/images/**':     'permitAll',
+            '/**/favicon.ico':   'permitAll',
+            '/login/**':         'permitAll',
+            '/logout/**':        'permitAll',
+            '/admin/**':         'ROLE_SUPER_USER',
+            '/blog/**':          'permitAll'
         ].each { k, v ->
             Requestmap.findOrCreateByUrlAndConfigAttribute(k, v).save()
         }
@@ -27,16 +42,8 @@ class BootStrap {
         def superUser = Role.findOrCreateByAuthority('ROLE_SUPER_USER').save(flush: true)
 
         if (!User.count()){
-            def sa = new User(username: 'sa', password: 'sapassword', enabled: true).save(flush: true)
-
-            def p2 = sa.springSecurityService.encodePassword('sapassword')
-            println sa.springSecurityService.passwordEncoder.isPasswordValid(sa.password, p2, null)
-            println sa.password
-            println p2
-
+            def sa = userService.createUser('sa', 'sapassword', true)
             UserRole.create(sa, superUser)
         }
-    }
-    def destroy = {
     }
 }
