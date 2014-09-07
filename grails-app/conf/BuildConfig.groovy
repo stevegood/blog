@@ -66,6 +66,7 @@ grails.project.dependency.resolution = {
 //        compile ':cache:1.1.7'
         compile ":asset-pipeline:1.9.6"
         compile ":mongodb:3.0.2"
+        compile ":mongodb-session:0.1"
         compile ":slug-generator:0.5"
         compile ":spring-security-core:2.0-RC4"
 
