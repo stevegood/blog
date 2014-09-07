@@ -1,3 +1,5 @@
+import org.springframework.cloud.CloudFactory
+
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -115,3 +117,28 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+try {
+    def cloud = new CloudFactory().cloud
+    def mongoInfo = cloud?.getServiceInfo('sgo-blog-data')
+
+    if (mongoInfo) {
+        grails {
+            mongo {
+                host = mongoInfo?.host
+                port = mongoInfo?.port
+                databaseName = mongoInfo?.database
+                username = mongoInfo?.userName
+                password = mongoInfo?.password
+            }
+        }
+    }
+} catch(e) {}
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.stevegood.blog.sec.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.stevegood.blog.sec.UserRole'
+grails.plugin.springsecurity.authority.className = 'org.stevegood.blog.sec.Role'
+grails.plugin.springsecurity.requestMap.className = 'org.stevegood.blog.sec.Requestmap'
+grails.plugin.springsecurity.securityConfigType = 'Requestmap'
+

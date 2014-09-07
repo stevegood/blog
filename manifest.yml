@@ -1,0 +1,17 @@
+---
+applications:
+- name: sgo-blog
+  memory: 2G
+  instances: 1
+  path: target/blog.war
+  services:
+    sgo-queue:
+      label: cloudamqp
+      provider: 
+      version: 
+      plan: lemur
+    sgo-blog-data:
+      label: mongolab
+      provider: 
+      version: 
+      plan: sandbox

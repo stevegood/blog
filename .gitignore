@@ -15,3 +15,9 @@ stacktrace.log
 /web-app/WEB-INF/classes
 /.link_to_grails_plugins/
 /target-eclipse/
+/build/
+/.gradle/
+/.grails/
+*.iml
+*.ipr
+*.rdb

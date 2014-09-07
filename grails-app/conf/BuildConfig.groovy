@@ -5,7 +5,7 @@ grails.project.test.reports.dir = "target/test-reports"
 grails.project.work.dir = "target/work"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
-//grails.project.war.file = "target/${appName}-${appVersion}.war"
+grails.project.war.file = "target/blog.war"
 
 grails.project.fork = [
     // configure settings for compilation JVM, note that if you alter the Groovy version forked compilation is required
@@ -44,6 +44,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenRepo "http://repo.spring.io/milestone"
     }
 
     dependencies {
@@ -51,6 +52,9 @@ grails.project.dependency.resolution = {
         // runtime 'mysql:mysql-connector-java:5.1.29'
         // runtime 'org.postgresql:postgresql:9.3-1101-jdbc41'
         test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
+        compile "net.sf.ehcache:ehcache-core:2.4.8"
+        compile "org.springframework.cloud:cloudfoundry-connector:0.9.9.RELEASE"
+        compile "org.springframework.cloud:spring-service-connector:0.9.9.RELEASE"
     }
 
     plugins {
@@ -59,12 +63,15 @@ grails.project.dependency.resolution = {
 
         // plugins for the compile step
         compile ":scaffolding:2.1.2"
-        compile ':cache:1.1.7'
+//        compile ':cache:1.1.7'
         compile ":asset-pipeline:1.9.6"
+        compile ":mongodb:3.0.2"
+        compile ":slug-generator:0.5"
+        compile ":spring-security-core:2.0-RC4"
 
         // plugins needed at runtime but not for compilation
-        runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"
-        runtime ":database-migration:1.4.0"
+//        runtime ":hibernate4:4.3.5.5" // or ":hibernate:3.6.10.17"
+//        runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
 
         // Uncomment these to enable additional asset-pipeline capabilities
