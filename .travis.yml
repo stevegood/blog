@@ -1,0 +1,13 @@
+language: groovy
+jdk:
+  - oraclejdk7
+services:
+  - mongdb
+  - redis-server
+branches:
+  only:
+    - master
+script: ./grailsw refresh-dependencies
+  && ./grailsw clean
+  && ./grailsw "test-app -coverage -xml"
+after_success: ./grailsw coveralls
