@@ -11,6 +11,6 @@ applications:
   - sgo-blog-data
       #label: mongolab
       #plan: sandbox
-  - sgo-blog-session
+  - session-replication
       #label: rediscloud
       #plan: 25mb

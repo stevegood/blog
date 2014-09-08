@@ -49,19 +49,18 @@ grails.project.dependency.resolution = {
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
-        test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
-        compile "net.sf.ehcache:ehcache-core:2.4.8"
-        compile "org.springframework.cloud:cloudfoundry-connector:0.9.9.RELEASE"
-        compile "org.springframework.cloud:spring-service-connector:0.9.9.RELEASE"
         build 'org.apache.httpcomponents:httpcore:4.3.2'
         build 'org.apache.httpcomponents:httpclient:4.3.2'
         build 'org.apache.httpcomponents:httpmime:4.3.3'
+        compile "net.sf.ehcache:ehcache-core:2.4.8"
+        compile "org.springframework.cloud:cloudfoundry-connector:0.9.9.RELEASE"
+        compile "org.springframework.cloud:spring-service-connector:0.9.9.RELEASE"
+        test "org.grails:grails-datastore-test-support:1.0-grails-2.4"
     }
 
     plugins {
         // plugins for the build system only
         build ":coveralls:0.1.3"
-        build ":standalone:1.2.1"
         build ":tomcat:7.0.55"
 
         // plugins for the compile step
@@ -71,7 +70,6 @@ grails.project.dependency.resolution = {
         compile ":scaffolding:2.1.2"
         compile ":slug-generator:0.5"
         compile ":spring-security-core:2.0-RC4"
-        compile ':standalone-tomcat-redis:0.3'
 
         // plugins needed at runtime but not for compilation
         runtime ":jquery:1.11.1"

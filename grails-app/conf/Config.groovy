@@ -99,7 +99,6 @@ environments {
 
             if (cloud) {
                 def mongoInfo = cloud?.getServiceInfo('sgo-blog-data')
-                def redisInfo = cloud?.getServiceInfo('sgo-blog-session')
 
                 grails {
                     if (mongoInfo) {
@@ -111,13 +110,6 @@ environments {
                             password = mongoInfo?.password
                         }
                     }
-                }
-
-                if (redisInfo) {
-//                    grails.plugin.standalone.tomcat.redis.dbIndex = 1
-                    grails.plugin.standalone.tomcat.redis.redisHostname = redisInfo?.host
-                    grails.plugin.standalone.tomcat.redis.redisPassword = redisInfo?.password
-                    grails.plugin.standalone.tomcat.redis.redisPort = redisInfo?.port
                 }
             }
         } catch(e) {}
