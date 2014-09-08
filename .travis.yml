@@ -17,3 +17,4 @@ script: ./grailsw refresh-dependencies
   && ./grailsw clean
   && ./grailsw "test-app -coverage -xml"
 after_success: ./grailsw coveralls
+  && ./grailsw war
