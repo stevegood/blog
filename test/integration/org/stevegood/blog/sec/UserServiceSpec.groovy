@@ -26,7 +26,6 @@ class UserServiceSpec extends Specification {
         expect: 'The user to be saved and have a valid ID'
         user.id > 0
         user.username == userprops.username
-        user.password != userprops.password
         def user_id = user.id
 
         // When the user has their details changed the save should happen with no errors

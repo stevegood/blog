@@ -25,7 +25,6 @@ class BootStrap {
         [
             '/':                 'permitAll',
             '/index':            'permitAll',
-            '/index.gsp':        'permitAll',
             '/assets/**':        'permitAll',
             '/**/js/**':         'permitAll',
             '/**/css/**':        'permitAll',
