@@ -21,6 +21,8 @@ class ArticleSpec extends Specification {
         def writer = new StringWriter()
         def html = new MarkupBuilder(writer).p 'This is the body of the test article'
         Article article = new Article(title: 'This is a test Article for integration testing', body: writer.toString())
+        if (!article.slugGeneratorService)
+            article.slugGeneratorService = slugGeneratorService
 
         expect: 'The following tests to pass'
         article.slug == null
