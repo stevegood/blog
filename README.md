@@ -13,4 +13,4 @@ The [stevegood.org](http://stevegood.org) (sgo) blog application.  The applicati
 Application data is stored in [MongoDB](http://mongodb.org) and sessions are replicated through [Redis](http://redis.io).
 
 [![Build Status](https://travis-ci.org/stevegood/blog.svg?branch=master)](https://travis-ci.org/stevegood/blog)
-[![Coverage Status](https://coveralls.io/repos/stevegood/blog/badge.png)](https://coveralls.io/r/stevegood/blog)
+[![Coverage Status](https://coveralls.io/repos/stevegood/blog/badge.png?branch=master)](https://coveralls.io/r/stevegood/blog?branch=master)
