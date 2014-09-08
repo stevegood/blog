@@ -24,11 +24,15 @@ class Article implements Serializable {
     }
 
     def beforeInsert() {
-        slug = slugGeneratorService.generateSlug(this.class, 'slug', title)
+        slug = generateSlug()
     }
 
     def beforeUpdate(){
         if(isDirty('title'))
-            slug = slugGeneratorService.generateSlug(this.class, 'slug', title)
+            slug = generateSlug()
+    }
+
+    String generateSlug() {
+        slugGeneratorService.generateSlug(this.class, 'slug', title)
     }
 }

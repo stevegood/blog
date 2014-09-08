@@ -9,8 +9,12 @@ import spock.lang.*
 class ArticleServiceSpec extends Specification {
 
     def articleService
+    def slugGeneratorService
 
     def setup() {
+        Article.metaClass.generateSlug = {
+            slugGeneratorService.generateSlug(delegate.class, 'slug', delegate.title)
+        }
     }
 
     def cleanup() {
