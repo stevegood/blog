@@ -16,3 +16,5 @@
 The [stevegood.org](http://stevegood.org) (sgo) blog application.  The application is built on
 [Grails](http://grails.org/) and is intended to be deployed to [CloudFoundry](http://cloudfoundry.org).
 Application data is stored in [MongoDB](http://mongodb.org) and sessions are replicated through [Redis](http://redis.io).
+
+[![Build Status](https://drone.io/bitbucket.org/stevegood/blog/status.png)](https://drone.io/bitbucket.org/stevegood/blog/latest)
