@@ -53,16 +53,19 @@ grails.project.dependency.resolution = {
         compile "net.sf.ehcache:ehcache-core:2.4.8"
         compile "org.springframework.cloud:cloudfoundry-connector:0.9.9.RELEASE"
         compile "org.springframework.cloud:spring-service-connector:0.9.9.RELEASE"
+        build 'org.apache.httpcomponents:httpcore:4.3.2'
+        build 'org.apache.httpcomponents:httpclient:4.3.2'
+        build 'org.apache.httpcomponents:httpmime:4.3.3'
     }
 
     plugins {
         // plugins for the build system only
+        build ":coveralls:0.1.3"
         build ":standalone:1.2.1"
         build ":tomcat:7.0.55"
 
         // plugins for the compile step
         compile ":asset-pipeline:1.9.6"
-        compile ":coveralls:0.1.3"
         compile ":mongodb:3.0.2"
         compile ":newrelic:1.0-2.18.0"
         compile ":scaffolding:2.1.2"
