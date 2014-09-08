@@ -1,8 +1,6 @@
 language: groovy
-jdk:
-  - oraclejdk7
 services:
-  - mongdb
+  - mongodb
   - redis-server
 branches:
   only:
