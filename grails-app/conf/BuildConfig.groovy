@@ -57,20 +57,22 @@ grails.project.dependency.resolution = {
 
     plugins {
         // plugins for the build system only
-        build ":tomcat:7.0.55"
         build ":standalone:1.2.1"
+        build ":tomcat:7.0.55"
 
         // plugins for the compile step
-        compile ":scaffolding:2.1.2"
         compile ":asset-pipeline:1.9.6"
         compile ":mongodb:3.0.2"
-//        compile ":redis-database-session:1.0.0"
-//        compile ":mongodb-session:0.1"
-        compile ':standalone-tomcat-redis:0.3'
+        compile ":newrelic:1.0-2.18.0"
+        compile ":scaffolding:2.1.2"
         compile ":slug-generator:0.5"
         compile ":spring-security-core:2.0-RC4"
+        compile ':standalone-tomcat-redis:0.3'
 
         // plugins needed at runtime but not for compilation
         runtime ":jquery:1.11.1"
+
+        // plugins for the testing phase
+        test ":code-coverage:2.0.3-2"
     }
 }

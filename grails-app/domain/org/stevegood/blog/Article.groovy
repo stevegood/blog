@@ -16,6 +16,7 @@ class Article implements Serializable {
 
     static constraints = {
         slug nullable: true, blank: false, unique: true
+        datePublished nullable: true
     }
 
     static mapping = {
