@@ -1,3 +1,4 @@
+import org.stevegood.blog.Article
 import org.stevegood.blog.sec.Requestmap
 import org.stevegood.blog.sec.Role
 import org.stevegood.blog.sec.User
@@ -5,6 +6,7 @@ import org.stevegood.blog.sec.UserRole
 
 class BootStrap {
 
+    def articleService
     def userService
 
     def init = { servletContext ->
@@ -12,6 +14,8 @@ class BootStrap {
         environments {
             development {
                 setup()
+                if (!Article.count())
+                    articleService.publishArticle(new Article(title: 'This is a test', body: 'This is a test article!'))
             }
             production {
                 setup()

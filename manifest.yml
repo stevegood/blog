@@ -5,18 +5,12 @@ applications:
   instances: 1
   path: target/blog.war
   services:
-    sgo-queue:
-      label: cloudamqp
-      provider: 
-      version: 
-      plan: lemur
-    sgo-blog-data:
-      label: mongolab
-      provider: 
-      version: 
-      plan: sandbox
-    sgo-blog-session:
-      label: rediscloud
-      provider:
-      version:
-      plan: 25mb
+  - sgo-queue
+      #label: cloudamqp
+      #plan: lemur
+  - sgo-blog-data
+      #label: mongolab
+      #plan: sandbox
+  - sgo-blog-session
+      #label: rediscloud
+      #plan: 25mb
