@@ -62,7 +62,7 @@ grails.project.dependency.resolution = {
 
         // plugins for the compile step
         compile ":asset-pipeline:1.9.6"
-//        compile ":coveralls:0.1.3"
+        compile ":coveralls:0.1.3"
         compile ":mongodb:3.0.2"
         compile ":newrelic:1.0-2.18.0"
         compile ":scaffolding:2.1.2"
