@@ -40,4 +40,47 @@ class BlogControllerSpec extends Specification {
             articleService.deleteArticle(it)
         }
     }
+
+    void "test show action happy path"() {
+        given: 'An Article is created'
+        def article = articleService.createArticle("This is an integration test from ${new Date().toString()}", 'This is the body', true)
+        assert article.slug
+
+        when: 'The show action is called using the article slug'
+        def result = controller.show(article.slug)
+
+        then: 'We should get back the same article instance'
+        article.id == result.article.id
+        article.slug == result.article.slug
+        article.title == result.article.title
+        article.body == result.article.body
+        article.published == result.article.published
+
+        articleService.deleteArticle article
+    }
+
+    void "test show action expect 404 for published == false"() {
+        given: 'An Article is created'
+        def article = articleService.createArticle("This is an integration test from ${new Date().toString()}", 'This is the body', false)
+        assert article.slug
+
+        when: 'The show action is called using the article slug'
+        def result = controller.show(article.slug)
+
+        then: 'The response should have a status of 404'
+        controller.response.status == 404
+
+        articleService.deleteArticle article
+    }
+
+    void "test show action for a slug that does not exist"() {
+        given: 'A slug that does not exist'
+        String slug = "this-will-never-exist-${new Date().time}"
+
+        when: 'The show action is called using the slug'
+        def result = controller.show(slug)
+
+        then: 'The response should have a status of 404'
+        controller.response.status == 404
+    }
 }

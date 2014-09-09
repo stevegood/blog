@@ -15,7 +15,9 @@ class BootStrap {
             development {
                 setup()
                 if (!Article.count())
-                    articleService.publishArticle(new Article(title: 'This is a test', body: 'This is a test article!'))
+                    10.times {
+                        articleService.publishArticle(new Article(title: "This is test # $it", body: 'This is a test article!'))
+                    }
             }
             production {
                 setup()
