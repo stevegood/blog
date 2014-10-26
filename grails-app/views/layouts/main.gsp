@@ -24,25 +24,6 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 page-info">
                         <h1 class="h1-page-title"><g:layoutTitle/></h1>
-
-                        <h2 class="h2-page-desc">
-                            What We have Done Lately
-                        </h2>
-
-                        <!-- BreadCrumb -->
-                        <div class="breadcrumb-container">
-                            <ol class="breadcrumb">
-                                <li>
-                                    <a href="">
-                                        <i class="icon-home"></i>
-                                        Home
-                                    </a>
-                                </li>
-                                <li>Blog</li>
-                            </ol>
-                        </div>
-                        <!-- BreadCrumb -->
-
                     </div>
                 </div>
             </div>
