@@ -5,31 +5,31 @@ import grails.transaction.Transactional
 @Transactional
 class ArticleService {
 
-    def createArticle(String title, String body, boolean published = false) {
-        new Article(title: title, body: body, published: published).save()
+    Article createArticle(String title, String body, boolean published = false, boolean flush = false) {
+        new Article(title: title, body: body, published: published).save(flush: flush)
     }
 
     @Transactional(readOnly = true)
-    def getArticle(long id) {
+    Article getArticle(long id) {
         Article.get(id)
     }
 
     @Transactional(readOnly = true)
-    def getArticle(String slug) {
+    Article getArticle(String slug) {
         Article.findBySlug(slug)
     }
 
-    def updateArticle(Article article) {
-        article.save()
+    Article updateArticle(Article article, boolean flush = false) {
+        article.save(flush: flush)
     }
 
-    void deleteArticle(Article article) {
-        article.delete()
+    void deleteArticle(Article article, boolean flush = flush) {
+        article.delete(flush: flush)
     }
 
-    def publishArticle(Article article) {
+    Article publishArticle(Article article, boolean flush = false) {
         article.published = true
         article.datePublished = new Date()
-        updateArticle(article)
+        updateArticle(article, flush)
     }
 }

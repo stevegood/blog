@@ -5,8 +5,8 @@ import grails.transaction.Transactional
 @Transactional
 class UserService {
 
-    def createUser(String username, String password, boolean enabled = false) {
-        User user = new User(username: username, password: password, enabled: enabled)
+    def createUser(String username, String password, String firstName, String lastName, String email, boolean enabled = false) {
+        User user = new User(username: username, password: password, enabled: enabled, firstName: firstName, lastName: lastName, email: email)
         if (!user.validate()){
             throw new UserValidationException('Error creating user', user)
         }
