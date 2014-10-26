@@ -1,6 +1,7 @@
 package org.stevegood.blog
 
 import groovy.xml.MarkupBuilder
+import org.stevegood.blog.sec.User
 import spock.lang.*
 
 /**
@@ -26,9 +27,12 @@ class ArticleServiceSpec extends Specification {
         new MarkupBuilder(writer).p 'This is a test!'
         def props = [title: 'Integration Test Article', published: false, body: writer.toString()]
         String slug = 'integration-test-article'
+        def author = User.findOrCreateByFirstNameAndLastNameAndUsernameAndEmail('Steve','Good','stevegood','steve@stevegood.org')
+        author.password = 'testing'
+        author.save()
 
         expect: 'The following code will exercise the service'
-        def article = articleService.createArticle(props.title, props.body, props.published)
+        def article = articleService.createArticle(props.title, props.body, author, props.published)
 
         // article should have an ID
         article.id > 0

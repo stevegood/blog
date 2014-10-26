@@ -27,12 +27,20 @@ class BootStrap {
                     ArticleComment.create(article, comment, true)
                 }
             }
+            test {
+                dropData()
+            }
             production {
                 setup()
             }
         }
     }
     def destroy = {
+        environments {
+            test{
+                dropData()
+            }
+        }
     }
 
     void setup() {

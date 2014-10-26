@@ -1,6 +1,7 @@
 package org.stevegood.blog
 
 import grails.test.mixin.TestFor
+import org.stevegood.blog.sec.User
 import spock.lang.*
 
 /**
@@ -10,18 +11,23 @@ import spock.lang.*
 class BlogControllerSpec extends Specification {
 
     def articleService
+    User author
 
     def setup() {
+        author = User.findOrCreateByFirstNameAndLastNameAndUsernameAndEmail('Steve','Good','stevegood','steve@stevegood.org')
+        author.password = 'testing'
+        author.save(flush: true)
     }
 
     def cleanup() {
+        author.delete(flush: true)
     }
 
     void "test index action"() {
         given: 'A collection of articles are created for testing'
         def articles = []
         6.times {
-            articles << articleService.createArticle("Testing $it", 'This is the body', true)
+            articles << articleService.createArticle("Testing $it", 'This is the body', author, true)
         }
 
         when: 'The index action is executed'
@@ -43,7 +49,7 @@ class BlogControllerSpec extends Specification {
 
     void "test show action happy path"() {
         given: 'An Article is created'
-        def article = articleService.createArticle("This is an integration test from ${new Date().toString()}", 'This is the body', true)
+        def article = articleService.createArticle("This is an integration test from ${new Date().toString()}", 'This is the body', author, true)
         assert article.slug
 
         when: 'The show action is called using the article slug'
@@ -61,7 +67,7 @@ class BlogControllerSpec extends Specification {
 
     void "test show action expect 404 for published == false"() {
         given: 'An Article is created'
-        def article = articleService.createArticle("This is an integration test from ${new Date().toString()}", 'This is the body', false)
+        def article = articleService.createArticle("This is an integration test from ${new Date().toString()}", 'This is the body', author, false)
         assert article.slug
 
         when: 'The show action is called using the article slug'

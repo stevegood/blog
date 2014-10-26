@@ -1,12 +1,13 @@
 package org.stevegood.blog
 
 import grails.transaction.Transactional
+import org.stevegood.blog.sec.User
 
 @Transactional
 class ArticleService {
 
-    Article createArticle(String title, String body, boolean published = false, boolean flush = false) {
-        new Article(title: title, body: body, published: published).save(flush: flush)
+    Article createArticle(String title, String body, User author, boolean published = false, boolean flush = false) {
+        new Article(title: title, body: body, author: author, published: published).save(flush: flush)
     }
 
     @Transactional(readOnly = true)
@@ -23,7 +24,7 @@ class ArticleService {
         article.save(flush: flush)
     }
 
-    void deleteArticle(Article article, boolean flush = flush) {
+    void deleteArticle(Article article, boolean flush = false) {
         article.delete(flush: flush)
     }
 
