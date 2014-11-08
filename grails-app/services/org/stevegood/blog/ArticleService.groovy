@@ -1,35 +1,36 @@
 package org.stevegood.blog
 
 import grails.transaction.Transactional
+import org.stevegood.blog.sec.User
 
 @Transactional
 class ArticleService {
 
-    def createArticle(String title, String body, boolean published = false) {
-        new Article(title: title, body: body, published: published).save()
+    Article createArticle(String title, String body, User author, boolean published = false, boolean flush = false) {
+        new Article(title: title, body: body, author: author, published: published).save(flush: flush)
     }
 
     @Transactional(readOnly = true)
-    def getArticle(long id) {
+    Article getArticle(long id) {
         Article.get(id)
     }
 
     @Transactional(readOnly = true)
-    def getArticle(String slug) {
+    Article getArticle(String slug) {
         Article.findBySlug(slug)
     }
 
-    def updateArticle(Article article) {
-        article.save()
+    Article updateArticle(Article article, boolean flush = false) {
+        article.save(flush: flush)
     }
 
-    void deleteArticle(Article article) {
-        article.delete()
+    void deleteArticle(Article article, boolean flush = false) {
+        article.delete(flush: flush)
     }
 
-    def publishArticle(Article article) {
+    Article publishArticle(Article article, boolean flush = false) {
         article.published = true
         article.datePublished = new Date()
-        updateArticle(article)
+        updateArticle(article, flush)
     }
 }

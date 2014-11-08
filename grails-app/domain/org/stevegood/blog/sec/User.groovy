@@ -6,6 +6,9 @@ class User implements Serializable {
 
 	String username
 	String password
+    String firstName
+    String lastName
+    String email
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
@@ -16,11 +19,15 @@ class User implements Serializable {
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+        firstName blank: false
+        lastName blank: false
+        email blank: false, email: true, unique: true
 	}
 
 	static mapping = {
 		password index: true
         username index: true
+        email index: true
 	}
 
 	Set<Role> getAuthorities() {
@@ -40,4 +47,8 @@ class User implements Serializable {
 	protected void encodePassword() {
 		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
 	}
+
+    String getFullName() {
+        "$firstName $lastName"
+    }
 }

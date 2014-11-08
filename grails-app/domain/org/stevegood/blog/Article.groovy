@@ -1,11 +1,15 @@
 package org.stevegood.blog
 
+import org.stevegood.blog.comment.Comment
+import org.stevegood.blog.sec.User
+
 class Article implements Serializable {
 
-    static transients = ['slugGeneratorService']
+    static transients = ['slugGeneratorService','comments','commentCount']
 
     def slugGeneratorService
 
+    User author
     String title
     String body
     String slug
@@ -34,5 +38,13 @@ class Article implements Serializable {
 
     String generateSlug() {
         slugGeneratorService.generateSlug(this.class, 'slug', title)
+    }
+
+    ArrayList<Comment> getComments() {
+        ArticleComment.findAllByArticle(this)*.comment
+    }
+
+    int getCommentCount() {
+        ArticleComment.countByArticle(this)
     }
 }

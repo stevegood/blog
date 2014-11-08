@@ -13,7 +13,10 @@ class UserServiceSpec extends Specification {
     def setup() {
         userprops = [
             username: 'chester',
-            password: 'testpassword'
+            password: 'testpassword',
+            firstName: 'Chester',
+            lastName: 'Tester',
+            email: 'chester@tester.com'
         ]
     }
 
@@ -21,7 +24,7 @@ class UserServiceSpec extends Specification {
 
     void "test user service crud methods"() {
         given: 'User parameters are sent to the service to create a user'
-        def user = userService.createUser(userprops.username, userprops.password, false)
+        def user = userService.createUser(userprops.username, userprops.password, userprops.firstName, userprops.lastName, userprops.email, false)
 
         expect: 'The user to be saved and have a valid ID'
         user.id > 0

@@ -18,9 +18,9 @@
                        data-rel="prettyPhoto[portfolio]" title="${article.title}">
                         <i class="icon-search"></i>
                     </a>
-                    <a href="">
+                    <g:link controller="blog" action="show" params="${[slug: article.slug]}">
                         <i class="icon-link"></i>
-                    </a>
+                    </g:link>
                 </div>
             </div>
         </div>
@@ -43,9 +43,9 @@
             <!-- Author Name -->
             <div class="blog-post-details-item blog-post-details-item-left">
                 <i class="icon-user"></i>
-                <a href="">
-                    Admin
-                </a>
+                <g:link controller="user" action="profile" params="${[username: article.author.username]}">
+                    ${article.author.fullName}
+                </g:link>
             </div>
             <!-- //Author Name// -->
 
@@ -64,14 +64,17 @@
             </div>
             <!-- //Tags// -->
 
-            <!-- Comments -->
-            <div class="blog-post-details-item blog-post-details-item-left">
-                <i class="icon-comment"></i>
-                <a href="">
-                    3 Comments
-                </a>
-            </div>
-            <!-- //Comments// -->
+            <g:set var="commentCount" value="${article.commentCount}" />
+            <g:if test="${commentCount}">
+                <!-- Comments -->
+                <div class="blog-post-details-item blog-post-details-item-left">
+                    <i class="icon-comment"></i>
+                    <a href="">
+                        ${commentCount} Comment${commentCount != 1 ? 's' : ''}
+                    </a>
+                </div>
+                <!-- //Comments// -->
+            </g:if>
 
         </div>
         <div class="space-sep20"></div>
